@@ -1,0 +1,245 @@
+<div class="content">
+
+  <ng-container>
+
+
+    <div class="container" [hidden]="isShow">
+      <img src="../../../assets/menu.png" class="nav" alt="" (click)=toggleDisplayTags()>
+      <img src="../../../assets/close.png" class="close" alt="" (click)=toggleDisplay()>
+      <div class="tags" [hidden]="isShowTags" >
+     
+        <div>
+        <button id="button" (click)=toggleOpleiding() (mouseover)="changeText=true" (mouseout)="changeText=false">opleidingen</button>
+        <div id="chatbox1" [hidden]="changeText">
+        
+        </div>
+        <div id="chatbox1" [hidden]="!changeText">
+          <div>
+            <img class="chatboxImg" src="../../../assets/chatbox.png" alt="">  
+            <h1 class="chatboxText">Klik hier om meer info te krijgen over opleidingen!</h1>
+          </div>
+         
+        </div>
+      </div> 
+       
+
+      <div>
+        <a href="https://www.erasmushogeschool.be/nl/inschrijven" target="_blankc">
+          <button id="button"  (mouseover)="changeTextInschrijven=true" (mouseout)="changeTextInschrijven=false">inschrijven</button>
+        </a>
+       
+        <div id="chatbox1" [hidden]="changeTextInschrijven">
+          
+        </div> 
+        <div id="chatbox1" [hidden]="!changeTextInschrijven">
+          <div>
+            <img class="chatboxImg" src="../../../assets/chatbox.png" alt="">  
+            <h1 class="chatboxText">Schrijf u nu in voor onze snelle inschrijvings programma!</h1>
+          </div> 
+        
+        </div> 
+      </div>
+      </div>
+
+      <div class="kaderRed">
+        <button class="slogan" (click)="sendMessage()">
+          <div class="kaderText"> 
+            <p class="sloganRed">NIET</p>
+            <p class="sloganRed">VOOR</p> 
+            <p class="sloganRed">IEDEREEN</p>
+          </div>
+        </button>
+      </div>
+
+      <div class="kaderGroen">
+        <button class="slogan2" (click)="sendMessage()">
+          <div class="kaderText2">
+            <p class="sloganGroen">MAAR</p>
+            <p class="sloganGroen">WEL VOOR</p>
+            <p class="sloganGroen">JOUW</p>
+          </div>
+
+        </button>
+      </div>
+
+
+      <div class="textfield" style="overflow: scroll; height: xyz;" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+
+        <div class="message from">Hallo! Hoe kan ik u helpen?</div>
+
+        <div>
+          <div class="buttonsTalk" (click)="sendMessageButton('Vraag over opleiding')"> Vraag over opleiding</div>
+          <div class="buttonsTalk" (click)="sendMessageButton('Algemene vraag')"> Algemene vraag</div>
+        </div>
+
+        <div *ngFor="let message of messages | async">
+          <div class="messageDIV">
+            <div class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
+                                      'to': message.sentBy === 'user' }">
+              {{ message.content }}
+
+            </div>
+
+          </div>
+
+          <div> 
+            <div class="buttonsTalk" *ngFor="let btn of message.button" (click)="sendMessageButton(btn.text)">
+
+         
+              <a *ngIf="btn.link !== undefined " href="{{btn.link}}" target="_blank"> {{ btn.text }} </a>
+              <a *ngIf="btn.link === undefined "> {{ btn.text }} </a>
+          
+              <iframe *ngIf='btn.video !== undefined && btn.video !== "" ' width='325' height="150" [src]="btn.video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+              
+              </iframe>    
+ 
+              <!-- {{ now }} --> 
+
+            </div>
+ 
+          </div>
+
+
+        </div>
+        <div class="opleidingen" [hidden]="isShowOpleiding">
+          <div class="message from">
+            Opleidingen die wij aanbieden!
+          </div>
+
+          <div class="opleidingCards">
+
+            <div class="opleidingCardMultec" (click)=toggleOpleidingMultec()>
+              <h1 class="boxTitle">Multimedia</h1>
+              <p class="boxText">In deze driejarige praktijkgerichte bacheloropleiding leer je multimediatoepassingen
+                maken zoals... </p>
+            </div>
+
+
+            <div class="opleidingCardDigx" (click)=toggleOpleidingDigx()>
+              <h1 class="boxTitle">Informatica</h1>
+              <p class="boxText">Een analist-programmeur ontwikkelt toepassingen vanaf het ontwerp tot de realisatie en
+                implementatie...</p>
+            </div>
+          </div>
+          <div class="opleidingMultecClick" [hidden]="isShowOpleidingMultec">
+
+            <div class="message from">
+              Ben jij een digitale maker van de
+              toekomst? Kom dan 'Multimedia &
+              Communicatietechnologie' studeren: 
+              een innoverende opleiding aan.
+            </div>
+
+            <div class="studiesBox">
+        
+             
+                <h1 class="studiesTitle">Sommige jobs na studies:</h1>
+     
+              <ul>
+                <li>Mobile app developer</li>
+                <li>Project manager</li>
+                <li>Web developer</li>
+              </ul> 
+              <div>
+              <a href="https://www.erasmushogeschool.be/nl/opleidingen/multimedia-communicatietechnologie" target="_blank"  (mouseover)="changeTextButton=true" (mouseout)="changeTextButton=false">
+               
+                  <button class="button2">  
+                    <img class="buttonImg" src="../../../assets/next.svg" />
+                  </button>
+
+
+               
+              
+              </a>
+            </div>
+              </div>
+        
+          </div>  
+          <div class="opleidingMultecClick" [hidden]="isShowOpleidingDigx">
+
+            <div class="message from">  
+             
+Wil je zelf apps kunnen maken voor je smartphone of tablet? 
+Als ook jij actief wil meewerken aan nieuwe technologieën in de volgende IT-revolutie en aan de basis wil staan van het nieuwe Internet of Things, dan is onze opleiding Toegepaste informatica zeker iets voor jou.
+            </div>
+
+            <div class="studiesBox">
+        
+             
+                <h1 class="studiesTitle">Sommige jobs na studies:</h1>
+     
+              <ul>
+                <li>Computeroperator</li> 
+                <li>Databankbeheerder</li>
+                <li>ICT-medewerker</li>
+              </ul>
+              <div>
+                <a href="https://www.erasmushogeschool.be/nl/opleidingen/toegepaste-informatica" target="_blank"  (mouseover)="changeTextButton=true" (mouseout)="changeTextButton=false">
+                 
+                    <button class="button2">   
+                      <img class="buttonImg" src="../../../assets/next.svg" />
+                    </button>
+  
+  
+                 
+                
+                </a>
+              </div>
+              </div>
+         
+          </div> 
+
+        </div>
+      </div> 
+
+
+
+
+
+
+      <!-- 
+    <label for="nameField">Your Message</label>
+    <input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text"><br>
+    <button (click)="sendMessage()">Send</button>  -->
+
+
+      <div class="input">
+        <div class="form-group" required>
+          <input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text" class="form-control"
+            placeholder="typ uw bericht in...">
+        </div>
+
+        <button class="button" (click)="sendMessage()">
+          <img class="buttonImg" src="../../../assets/send.svg" />
+        </button>
+      </div>
+
+
+    </div>
+
+  </ng-container>
+ 
+  <div class="bottomHomeInfo">
+    <div class="homeInfo" (click)=toggleDisplay()>
+      <h1 class="homeInfoTitle">Heeft u vragen?</h1>
+      <h2 class="homeInfoSubTitle">Start een discussie met onze chatbot nu!</h2>
+      <div class="box">
+        <img class="horse" src="../../../assets/horsemgghga.png" alt="">
+
+        
+        <div id="chatbox2" [hidden]="changeTextButton"> 
+        
+        </div> 
+        <div id="chatbox2" [hidden]="!changeTextButton"> 
+          <div>
+            <img class="chatboxImg2" src="../../../assets/chatbox4.png" alt="">  
+            <h1 class="chatboxText2">Ontdek meer!</h1>
+          </div>
+         
+        </div>
+      </div>
+     
+    </div>
+  </div>
+
+</div>

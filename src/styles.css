@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    scrollbar-color: #E30713 transparent;   
+    scrollbar-width: thin; 
+}
+body{
+    overflow-x: hidden;
+    background-color: #EEEEEE;
+    background-image: url("assets/ehbfinal.jpg");  
+    /* height: 300vh; */
+  }
